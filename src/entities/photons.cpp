@@ -1,4 +1,5 @@
 #include "photons.hpp"
+#include <cmath>
 
 /* distance between samples */
 const double SAMPLE_STEP = 10;
