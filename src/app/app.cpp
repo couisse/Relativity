@@ -38,7 +38,7 @@ void refEperiment(){
     ///Getting parameters
     std::cout << "In this experiment, you will be able to visualize Lorentz's transformation effects.\n";
     std::cout << "Please specify the number of frame of reference you want to introduce, in addition to the ground one (max 5): ";
-    unsigned short n = askInt(0, 5);
+    int n = askInt(0, 5);
 
     std::cout << "Now, for each frame of reference, you will have to specify its speed relative to the ground as a fraction ";
     std::cout << "of c\n(c is intentionally low in this experiment to let you see the effects).\nNegative fraction will result ";
@@ -46,6 +46,10 @@ void refEperiment(){
 
     std::vector<ReferenceFrame> frames;
     std::vector<PeriodicShip> ships;
+
+    //to avoid memory reallocation
+    frames.reserve(n + 1);
+    ships.reserve(n + 1);
 
     frames.emplace_back(0);
     ships.emplace_back(&frames[0], 50, 50, 175);
@@ -63,13 +67,13 @@ void refEperiment(){
     std::cout << "You can now see the frames of reference. Use left and right click to cycle ";
     std::cout << "through frames. Press Escape to exit" << std::endl;
 
-    sf::RenderWindow window(sf::VideoMode(800, 300 + n * 100), "Relativity Illustrated");
+    sf::RenderWindow window(sf::VideoMode(800, 300  + n * 100), "Relativity Illustrated");
 
     sf::VertexArray vertices(sf::Quads);
 
     Position observer(0, 0, &frames[0]);
 
-    unsigned short selected = 0;
+    int selected = 0;
 
     sf::Clock clock;
 
