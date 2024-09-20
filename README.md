@@ -2,7 +2,7 @@
 A small visualization of the effects of relativity on objects.
 
 ## Install
-This project uses only SFML as library, you can thus install it (tutorial [here](https://www.sfml-dev.org/tutorials/2.6/) or directly use the precompiled version in the release tab of this project (all-in-one exe file)
+This project uses only SFML as library, you can thus install it (tutorial [here](https://www.sfml-dev.org/tutorials/2.6/) or directly use the precompiled version in the release tab of this project (all-in-one exe file [here](https://github.com/couisse/Relativity/releases/tag/exe))
 
 ## Usage 
 The program will let you create multiple galilean frames of reference you'll be able to cycle through, to see the effects of Lorentz's transformation, including:
