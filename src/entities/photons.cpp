@@ -1,10 +1,11 @@
 #include "photons.hpp"
-#include <cmath>
 
 /* distance between samples */
 const double SAMPLE_STEP = 10;
 /* thickness of the lines */
 const double LINE_THICKNESS = 4;
+/* color of the wave */
+const sf::Color SIGNAL_COLOR(0xfa, 0xbd, 0x2f);
 
 const double C_2 = C * C;
 
@@ -25,21 +26,21 @@ void EMWave::get_vertices(Position observer, sf::Vector2u screenSize, sf::Vertex
     double end = screenSize.x * 0.5 + observer.x + SAMPLE_STEP;
     double value;
     double first = true;
-    double x, y;
+    double x(0), y(0);
     while (current < end){
         value = m_amplitude * (1 + cos(relativeK * current - relativeOmega * observer.t));
         y = screenSize.y - m_altitude - value; //SFML Reverses the y axis
         x = current - observer.x + screenSize.x * 0.5;
-        target->append(sf::Vertex(sf::Vector2f(x, y), sf::Color::Yellow));
-        target->append(sf::Vertex(sf::Vector2f(x, y - SAMPLE_STEP), sf::Color::Yellow));
+        target->append(sf::Vertex(sf::Vector2f(x, y), SIGNAL_COLOR));
+        target->append(sf::Vertex(sf::Vector2f(x, y - SAMPLE_STEP), SIGNAL_COLOR));
         //if not the first time, points have to be added twice for the quads
         if (!first){
-            target->append(sf::Vertex(sf::Vector2f(x, y), sf::Color::Yellow));
-            target->append(sf::Vertex(sf::Vector2f(x, y - SAMPLE_STEP), sf::Color::Yellow));
+            target->append(sf::Vertex(sf::Vector2f(x, y), SIGNAL_COLOR));
+            target->append(sf::Vertex(sf::Vector2f(x, y - SAMPLE_STEP), SIGNAL_COLOR));
         }else {first = false;}
         current += SAMPLE_STEP;
     }
     //closing the last quad on itself
-    target->append(sf::Vertex(sf::Vector2f(x, y), sf::Color::Yellow));
-    target->append(sf::Vertex(sf::Vector2f(x, y - SAMPLE_STEP), sf::Color::Yellow));
+    target->append(sf::Vertex(sf::Vector2f(x, y), SIGNAL_COLOR));
+    target->append(sf::Vertex(sf::Vector2f(x, y - SAMPLE_STEP), SIGNAL_COLOR));
 }

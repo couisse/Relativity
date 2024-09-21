@@ -2,8 +2,10 @@
 #define PERIODICSHIP_CPP_INCLUDED
 
 #include <cmath>
-#include <iostream>
 #include "periodicship.hpp"
+
+const sf::Color SHIPS_COLOR(0x28, 0x28, 0x28);
+const sf::Color SIGNAL_COLOR(0xcc, 0x24, 0x1d);
 
 PeriodicShip::PeriodicShip(ReferenceFrame *frame, double altitude, double size, double period)
     : DrawableEntity(frame), m_altitude(altitude), m_size(size), m_period(period) {
@@ -44,14 +46,14 @@ void PeriodicShip::addShip(Coords settings, double gamma, sf::VertexArray* targe
     //SFML reverses the y scale
     double y = y_offset - m_altitude;
     //the color factor for the blinking
-    double color_factor = 0.5 * (1 + sin(settings.t * 2 * 3.14159)); //pulsating at 1Hz
-    sf::Color color(255 * color_factor, 0, 0);
+    int color_factor = 128 * (1.0 + sin(settings.t * 2 * 3.14159)); //pulsating at 1Hz
+    sf::Color color = sf::Color(color_factor, color_factor, color_factor) * SIGNAL_COLOR;
     //adding the ship
     //first the frame
-    target->append(sf::Vertex(sf::Vector2f(lx, y), sf::Color::Black));
-    target->append(sf::Vertex(sf::Vector2f(lx, y - m_size), sf::Color::Black));
-    target->append(sf::Vertex(sf::Vector2f(rx, y - m_size), sf::Color::Black));
-    target->append(sf::Vertex(sf::Vector2f(rx, y), sf::Color::Black));
+    target->append(sf::Vertex(sf::Vector2f(lx, y), SHIPS_COLOR));
+    target->append(sf::Vertex(sf::Vector2f(lx, y - m_size), SHIPS_COLOR));
+    target->append(sf::Vertex(sf::Vector2f(rx, y - m_size), SHIPS_COLOR));
+    target->append(sf::Vertex(sf::Vector2f(rx, y), SHIPS_COLOR));
     //then the light diamond
     target->append(sf::Vertex(sf::Vector2f(origin, y - 0.25 * m_size)               , color));
     target->append(sf::Vertex(sf::Vector2f(0.5 * (lx + origin), y - 0.5 * m_size)   , color));

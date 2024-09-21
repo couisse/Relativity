@@ -43,6 +43,8 @@ void refEperiment(){
     std::cout << "Now, for each frame of reference, you will have to specify its speed relative to the ground as a fraction ";
     std::cout << "of c\n(c is intentionally low in this experiment to let you see the effects).\nNegative fraction will result ";
     std::cout << "in the frame to go in the decreasing x way, instead of increasing.\nBoundaries are -0.99 and 0.99\n";
+    std::cout << "Note: when done so, the visualization window will pop up. Be carefull to continue to read this console";
+    std::cout << "important informations might be display while performing the experiment\n";
 
     std::vector<ReferenceFrame> frames;
     std::vector<PeriodicShip> ships;
@@ -64,8 +66,10 @@ void refEperiment(){
 
     EMWave wave(true, 150 + n * 100 , 100, 50);
 
-    std::cout << "You can now see the frames of reference. Use left and right click to cycle ";
-    std::cout << "through frames. Press Escape to exit" << std::endl;
+    std::cout << "You can now see the frames of reference. Use [left and right click] to cycle ";
+    std::cout << "through frames.\nThe sinusoid on top of the screen is a EM wave traveling.";
+    std::cout << "You can note that its speed is always, no matter the reference frame\n";
+    std::cout << "Press [Escape] to exit" << std::endl;
 
     sf::RenderWindow window(sf::VideoMode(800, 300  + n * 100), "Relativity Illustrated");
 
@@ -114,12 +118,13 @@ void refEperiment(){
         wave.get_vertices(observer, window.getSize(), &vertices);
 
         //the ground
-        vertices.append(sf::Vertex(sf::Vector2f(0, sizeScreen.y), sf::Color::Black));
-        vertices.append(sf::Vertex(sf::Vector2f(sizeScreen.x, sizeScreen.y), sf::Color::Black));
+        vertices.append(sf::Vertex(sf::Vector2f(0, sizeScreen.y), sf::Color(0x28, 0x28, 0x28)));
+        vertices.append(sf::Vertex(sf::Vector2f(sizeScreen.x, sizeScreen.y), sf::Color(0x28, 0x28, 0x28)));
+        //top pixels are black to make a little transition
         vertices.append(sf::Vertex(sf::Vector2f(sizeScreen.x, sizeScreen.y - 50), sf::Color::Black));
         vertices.append(sf::Vertex(sf::Vector2f(0, sizeScreen.y - 50), sf::Color::Black));
 
-        window.clear(sf::Color::Blue);
+        window.clear(sf::Color(0x45, 0x85, 0x88));
         window.draw(vertices);
         window.display();
 
