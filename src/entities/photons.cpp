@@ -1,3 +1,4 @@
+#include <cmath>
 #include "photons.hpp"
 
 /* distance between samples */
