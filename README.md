@@ -10,8 +10,9 @@ The program will let you create multiple galilean frames of reference you'll be 
 * Length contraction
 * Loss of synchronization
 * constancy of EM waves travel speed
-To do so, each frame of reference will include an infinite line of regularly spaced squared with synchronized (in their reference frame) pulsating light at 1Hz, and a travelling EM on top of sreen.
-NOTE: be careful to reead all the text in the console, even though another window popped up.
+<!-- End of list -->
+To do so, each frame of reference will include an infinite line of regularly spaced squared with synchronized (in their reference frame) pulsating light at 1Hz, and a travelling EM on top of screen.\
+NOTE: be careful to reead all the text in the console, even though another window popped up.\
 NOTE: the program still has a lot of bugs. In case a problem arises, don't hesitate to kill the window/process, it won't cause any harm to your device.
 
 ## Future
