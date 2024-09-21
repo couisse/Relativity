@@ -28,6 +28,10 @@ protected:
     double m_omega;
     double m_k;
     double m_amplitude;
+
+///internal methods
+protected:
+    void sample(double x, double t, sf::Vector2f& a, sf::Vector2f& b, double romega, double rk);
 };
 
 #endif // PHOTONS_H_INCLUDED

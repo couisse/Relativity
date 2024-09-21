@@ -43,8 +43,8 @@ void refEperiment(){
     std::cout << "Now, for each frame of reference, you will have to specify its speed relative to the ground as a fraction ";
     std::cout << "of c\n(c is intentionally low in this experiment to let you see the effects).\nNegative fraction will result ";
     std::cout << "in the frame to go in the decreasing x way, instead of increasing.\nBoundaries are -0.99 and 0.99\n";
-    std::cout << "Note: when done so, the visualization window will pop up. Be carefull to continue to read this console";
-    std::cout << "important informations might be display while performing the experiment\n";
+    std::cout << "Note: when done so, the visualization window will pop up. Be careful to continue to read this console";
+    std::cout << " important informations might be displayed while performing the experiment\n";
 
     std::vector<ReferenceFrame> frames;
     std::vector<PeriodicShip> ships;
@@ -71,7 +71,15 @@ void refEperiment(){
     std::cout << "You can note that its speed is always, no matter the reference frame\n";
     std::cout << "Press [Escape] to exit" << std::endl;
 
-    sf::RenderWindow window(sf::VideoMode(800, 300  + n * 100), "Relativity Illustrated");
+    sf::Vector2u sizeScreen;
+    sizeScreen.x = 800;
+    sizeScreen.y = 300  + n * 100;
+
+    sf::RenderWindow window(
+        sf::VideoMode(sizeScreen.x, sizeScreen.y, sf::Style::Titlebar | sf::Style::Close),
+        "Relativity Illustrated");
+
+    window.setFramerateLimit(60); //limitting the framerate to avoid the window overconsuming
 
     sf::VertexArray vertices(sf::Quads);
 
@@ -106,11 +114,9 @@ void refEperiment(){
                     window.close();
                 }
             }else if (event.type == sf::Event::Resized){
-                window.setSize(sf::Vector2u(event.size.width, event.size.height));
+                window.setSize(sizeScreen); //size is locked
             }
         }
-
-        sf::Vector2u sizeScreen = window.getSize();
 
         for (int i = 0; i <= n ; ++i){
             ships[i].get_vertices(observer, sizeScreen, &vertices);
